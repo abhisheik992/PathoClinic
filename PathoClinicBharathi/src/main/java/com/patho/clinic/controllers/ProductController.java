@@ -1,9 +1,12 @@
 package com.patho.clinic.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +34,12 @@ public class ProductController {
 	public ResponseEntity<Price> createProductDetails(@RequestBody Price productDetails) {
 		Price _price = productService.addProductDetails(productDetails);
 		return new ResponseEntity<>(_price, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/products")
+	public ResponseEntity<List<Price>> getAllProducts() {
+		List<Price> _productList = this.productService.getAllProducts();
+		return new ResponseEntity<>(_productList, HttpStatus.CREATED);
 	}
 
 }

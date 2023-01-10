@@ -17,5 +17,7 @@ public interface IPackage {
 	ProductPackage addProductToPackage(ProductPackage productPackage);
 	
 	public PackagePrice addProductDetails(PackagePrice packageDetails);
+	
+	public List<PackagePrice> getAllPackages();
 
 }

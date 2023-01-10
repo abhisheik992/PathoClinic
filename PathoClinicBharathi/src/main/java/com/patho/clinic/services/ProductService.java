@@ -1,5 +1,7 @@
 package com.patho.clinic.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +28,11 @@ public class ProductService implements IProduct{
 	@Override
 	public Price addProductDetails(Price productDetails) {
 		return this.priceRepository.save(productDetails);
+	}
+
+	@Override
+	public List<Price> getAllProducts() {
+		return this.priceRepository.findAll();
 	}
 
 }

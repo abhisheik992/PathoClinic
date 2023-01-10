@@ -53,5 +53,11 @@ public class PackageController {
 		PackagePrice _price = packageService.addProductDetails(packageDetails);
 		return new ResponseEntity<>(_price, HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/packages")
+	public ResponseEntity<List<PackagePrice>> getAllPackages() {
+		List<PackagePrice> _packagesList = this.packageService.getAllPackages();
+		return new ResponseEntity<>(_packagesList, HttpStatus.CREATED);
+	}
 
 }

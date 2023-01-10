@@ -55,4 +55,9 @@ public class PackageService implements IPackage {
 		return this.packagePriceRepository.save(packageDetails);
 	}
 
+	@Override
+	public List<PackagePrice> getAllPackages() {
+		return this.packagePriceRepository.findAll();
+	}
+
 }

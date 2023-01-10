@@ -1,9 +1,12 @@
 package com.patho.clinic.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,5 +34,11 @@ public class InvoiceController {
 	public ResponseEntity<Invoice> getInvoiceById(@RequestBody RequestPayload request) {
 		Invoice _invoice = invoiceService.findInvoiceById(request);
 		return new ResponseEntity<>(_invoice, HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/invoices")
+	public ResponseEntity<List<Invoice>> getAllOrders() {
+		List<Invoice> _invoicesList = this.invoiceService.getAllInvoices();
+		return new ResponseEntity<>(_invoicesList, HttpStatus.CREATED);
 	}
 }
