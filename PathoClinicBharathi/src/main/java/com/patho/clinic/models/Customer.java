@@ -37,7 +37,8 @@ public class Customer {
 	@Column(name = "customer_age")
 	private int age;
 	
-    @OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "customer_id")
     private List<CustomerReports> customerReportsList;
 
@@ -92,6 +93,14 @@ public class Customer {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+	
+	public List<CustomerReports> getCustomerReportsList() {
+		return customerReportsList;
+	}
+
+	public void setCustomerReportsList(List<CustomerReports> customerReportsList) {
+		this.customerReportsList = customerReportsList;
 	}
 
 	@Override

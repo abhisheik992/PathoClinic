@@ -1,5 +1,7 @@
 package com.patho.clinic.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.patho.clinic.audit.DateAudit;
 
 import jakarta.persistence.Column;
@@ -7,7 +9,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -24,8 +25,9 @@ public class CustomerReports extends DateAudit{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@JoinColumn(name = "customer_id", referencedColumnName = "id")
-	@ManyToOne
+	@JsonProperty(access = Access.WRITE_ONLY)
+//	@JoinColumn(name = "customer_id", referencedColumnName = "id")
+	@ManyToOne()
 	private Customer customer;
 	
 	@Column(name = "report_url")

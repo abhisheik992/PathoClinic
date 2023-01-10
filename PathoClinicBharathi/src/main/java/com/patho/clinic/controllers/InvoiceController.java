@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.patho.clinic.interfaces.IInvoice;
 import com.patho.clinic.models.Invoice;
+import com.patho.clinic.payloads.RequestPayload;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,8 +22,14 @@ public class InvoiceController {
 	private IInvoice invoiceService;
 	
 	@PostMapping("/invoice")
-	public ResponseEntity<Invoice> createCustomer(@RequestBody Invoice invoice) {
+	public ResponseEntity<Invoice> createInvoice(@RequestBody Invoice invoice) {
 		Invoice _invoice = invoiceService.addInvoice(invoice);
+		return new ResponseEntity<>(_invoice, HttpStatus.CREATED);
+	}
+	
+	@PostMapping("/getinvoice")
+	public ResponseEntity<Invoice> getInvoiceById(@RequestBody RequestPayload request) {
+		Invoice _invoice = invoiceService.findInvoiceById(request);
 		return new ResponseEntity<>(_invoice, HttpStatus.CREATED);
 	}
 }

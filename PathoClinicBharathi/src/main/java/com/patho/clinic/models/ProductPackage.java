@@ -2,8 +2,6 @@ package com.patho.clinic.models;
 
 import java.util.List;
 
-import com.patho.clinic.audit.DateAudit;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,14 +15,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Product")
-public class Product extends DateAudit{
+@Table(name = "Product_Package")
+public class ProductPackage {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5493029158721692960L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -45,26 +38,29 @@ public class Product extends DateAudit{
 	
 	@Column(name = "active")
 	private boolean active;
-	
+
 	@ManyToMany
 	@JoinTable(
 	  name = "Packages", 
-	  joinColumns = @JoinColumn(name = "product_id"), 
-	  inverseJoinColumns = @JoinColumn(name = "package_id"))
-	private List<ProductPackage> packageList;
+	  joinColumns = @JoinColumn(name = "package_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "product_id"))
+	private List<Product> productList;
 
-	public Product() {
+	public ProductPackage() {
 		super();
 	}
 
-	public Product(Long id, String name,
-			String description, String image, String alias, boolean active) {
+	public ProductPackage(Long id,
+			@NotNull(message = "Mandatory field Product Name can not be null.") @NotBlank(message = "Mandatory field Product Name can not be null.") String name,
+			String description, String image, String alias, boolean active, List<Product> productList) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;
 		this.alias = alias;
 		this.active = active;
+		this.productList = productList;
 	}
 
 	public Long getId() {
@@ -115,11 +111,18 @@ public class Product extends DateAudit{
 		this.active = active;
 	}
 
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image + ", alias="
-				+ alias + ", active=" + active + "]";
+	public List<Product> getProductList() {
+		return productList;
 	}
 
-	
+	public void setProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductPackage [id=" + id + ", name=" + name + ", description=" + description + ", image=" + image
+				+ ", alias=" + alias + ", active=" + active + ", productList=" + productList + "]";
+	}
+
 }
