@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.patho.clinic.interfaces.ICustomer;
+import com.patho.clinic.models.Address;
 import com.patho.clinic.models.Customer;
 import com.patho.clinic.models.CustomerReports;
 import com.patho.clinic.payloads.RequestPayload;
+import com.patho.clinic.repositories.AddressRepository;
 import com.patho.clinic.repositories.CustomerReportsRepository;
 import com.patho.clinic.repositories.CustomerRepository;
 
@@ -17,6 +19,9 @@ public class CustomerService implements ICustomer {
 	
 	@Autowired
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private AddressRepository addressRepository;
 	
 	@Autowired
 	private CustomerReportsRepository customerReportsRepository;
@@ -44,6 +49,11 @@ public class CustomerService implements ICustomer {
 			return customerDetails;
 		}
 		return null;
+	}
+
+	@Override
+	public Address addAddress(Address address) {
+		return this.addressRepository.save(address);
 	}
 
 }

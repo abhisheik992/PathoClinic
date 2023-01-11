@@ -1,5 +1,7 @@
 package com.patho.clinic.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,12 @@ public class OrderService implements IOrder {
 	@Override
 	public Order addOrder(Order order) {
 		return this.orderRepository.save(order);
+	}
+
+
+	@Override
+	public List<Order> getAllOrders() {
+		return this.orderRepository.findAll();
 	}
 
 }

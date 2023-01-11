@@ -18,6 +18,5 @@ public interface IPackage {
 	
 	public PackagePrice addProductDetails(PackagePrice packageDetails);
 	
-	public List<PackagePrice> getAllPackages();
 
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patho.clinic.interfaces.ICustomer;
+import com.patho.clinic.models.Address;
 import com.patho.clinic.models.Customer;
 import com.patho.clinic.models.CustomerReports;
 import com.patho.clinic.payloads.RequestPayload;
@@ -47,5 +48,11 @@ public class CustomerController {
 		List<CustomerReports>  _customerDetails = customerService.getCustomerByIdWithReport(request);
 		return new ResponseEntity<>(_customerDetails, HttpStatus.CREATED);
 	}
+	
+	@PostMapping("/address")
+	public ResponseEntity<Address> createAddress(@RequestBody Address address) {
+		Address _address = customerService.addAddress(address);
+		return new ResponseEntity<>(_address, HttpStatus.CREATED);
+	} 
 
 }

@@ -1,5 +1,6 @@
 package com.patho.clinic.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,11 @@ public class InvoiceService implements IInvoice {
 	@Override
 	public Invoice findInvoiceById(RequestPayload request) {
 		return this.invoiceRepository.findById(request.getId()).get();
+	}
+
+	@Override
+	public List<Invoice> getAllInvoices() {
+		return this.invoiceRepository.findAll();
 	}
 
 }
